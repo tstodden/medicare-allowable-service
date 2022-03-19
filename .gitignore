@@ -1,0 +1,12 @@
+.vscode
+.env
+
+env
+__pycache__
+
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-medicare-allowable-service
+
+service-account.json
