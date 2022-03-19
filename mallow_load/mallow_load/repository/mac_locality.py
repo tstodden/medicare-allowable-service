@@ -5,7 +5,11 @@ from mallow_load.mallow_load.repository.base import Repository
 
 class MacLocalityRepository(Repository):
     def __init__(self) -> None:
-        self.repository: dict[tuple[int, int], MacLocality] = dict()
+        self._repository: dict[tuple[int, int], MacLocality] = dict()
+
+    @property
+    def repository(self):
+        return self._repository
 
     def get(self, key: tuple[int, int]) -> MacLocality:
         if not (item := self.repository.get(key)):

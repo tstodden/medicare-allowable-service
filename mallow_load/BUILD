@@ -3,7 +3,7 @@ load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
 
 py_library(
     name = "lib",
-    srcs = glob(["mallow_load/*.py"]),
+    srcs = glob(["mallow_load/**/*.py"]),
     deps = ["//requirements:deps"],
 )
 

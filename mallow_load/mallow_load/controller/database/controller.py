@@ -4,7 +4,7 @@ from elastic_transport import HeadApiResponse
 from elasticsearch import Elasticsearch
 from elasticsearch.client import IndicesClient
 
-from mallow_load.mallow_load.elasticsearch.mapping import get_mapping_by_index
+from mallow_load.mallow_load.controller.database.mapping import get_mapping_by_index
 
 
 class ElasticsearchController:

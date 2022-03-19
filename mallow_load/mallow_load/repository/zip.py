@@ -5,7 +5,11 @@ from mallow_load.mallow_load.repository.base import Repository
 
 class ZipCodeRepository(Repository):
     def __init__(self) -> None:
-        self.repository: dict[str, ZipCode] = dict()
+        self._repository: dict[str, ZipCode] = dict()
+
+    @property
+    def repository(self):
+        return self._repository
 
     def get(self, key: str) -> ZipCode:
         if not (item := self.repository.get(key)):
