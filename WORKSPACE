@@ -14,16 +14,12 @@ http_archive(
 )
 
 # install python dependencies
-load("@rules_python//python:pip.bzl", "pip_parse")
+load("@rules_python//python:pip.bzl", "pip_install")
 
-pip_parse(
+pip_install(
     name = "python_deps",
-    requirements_lock = "//requirements:requirements.txt",
+    requirements = "//requirements:requirements.txt",
 )
-
-load("@python_deps//:requirements.bzl", "install_deps")
-
-install_deps()
 
 # download io_bazel_rules_docker
 http_archive(
