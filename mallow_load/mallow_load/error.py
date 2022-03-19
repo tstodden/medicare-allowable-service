@@ -4,3 +4,7 @@ class Error(Exception):
 
 class NotPresentInRepositoryError(Error):
     pass
+
+
+class MappingDoesNotExistError(Error):
+    pass
