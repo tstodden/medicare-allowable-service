@@ -20,23 +20,19 @@ class GoogleStorageController:
         self.client = storage.Client()
         self.bucket = self.client.get_bucket(os.environ["MALLOW_BUCKET"])
 
-    def load_repository(self, type_: RepositoryType, year: int) -> Repository:
-        result = None
-        if type_ == RepositoryType.ZIP_CODE:
-            result = self._load_zip_code_repository(year)
-        elif type_ == RepositoryType.MAC_LOCALITY:
-            result = self._load_mac_locality_repository(year)
-        else:
-            raise ValueError(f"{type_} is not a valid repository type.")
-        return result
-
-    def _load_zip_code_repository(self, year: int) -> Repository:
+    def load_zip_code_repository(self, year: int) -> ZipCodeRepository:
         blob = self.bucket.get_blob(f"{BucketPrefix.ZIP_DATA.value}/zip-{year}.csv")
-        return self._add_blob_to_repository(blob, ZipCodeRepository())
+        repository = self._add_blob_to_repository(blob, ZipCodeRepository())
+        if not isinstance(repository, ZipCodeRepository):
+            raise ValueError("Incorrect repository type.")
+        return repository
 
-    def _load_mac_locality_repository(self, year: int) -> Repository:
+    def load_mac_locality_repository(self, year: int) -> MacLocalityRepository:
         blob = self.bucket.get_blob(f"{BucketPrefix.GPCI_DATA.value}/gpci-{year}.csv")
-        return self._add_blob_to_repository(blob, MacLocalityRepository())
+        repository = self._add_blob_to_repository(blob, MacLocalityRepository())
+        if not isinstance(repository, MacLocalityRepository):
+            raise ValueError("Incorrect repository type.")
+        return repository
 
     def _add_blob_to_repository(self, blob: Blob, repository: Repository) -> Repository:
         with SpooledTemporaryFile(mode="w") as tmp_file:
