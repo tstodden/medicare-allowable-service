@@ -39,3 +39,70 @@ class MacLocality:
             pe_gpci=float(dict_["pe_gpci"]),
             mp_gpci=float(dict_["mp_gpci"]),
         )
+
+
+@dataclass(frozen=True)
+class Charge:
+    charge_code: str
+    modifier: str
+    year: int
+    description: str
+    pw_rvu: float
+    non_fac_pe_rvu: float
+    fac_pe_rvu: float
+    mp_rvu: float
+    conv_factor: float
+
+    @classmethod
+    def from_dict(cls, dict_: dict[str, str]) -> "Charge":
+        return cls(
+            charge_code=dict_["charge_code"],
+            modifier=dict_["modifier"],
+            year=int(dict_["year"]),
+            description=dict_["description"],
+            pw_rvu=float(dict_["pw_rvu"]),
+            non_fac_pe_rvu=float(dict_["non_fac_pe_rvu"]),
+            fac_pe_rvu=float(dict_["fac_pe_rvu"]),
+            mp_rvu=float(dict_["mp_rvu"]),
+            conv_factor=float(dict_["conv_factor"]),
+        )
+
+
+@dataclass(frozen=True)
+class Drug:
+    charge_code: str
+    quarter: int
+    year: int
+    description: str
+    dosage: str
+    price: float
+
+    @classmethod
+    def from_dict(cls, dict_: dict[str, str]) -> "Drug":
+        return cls(
+            charge_code=dict_["charge_code"],
+            quarter=int(dict_["quarter"]),
+            year=int(dict_["year"]),
+            description=dict_["description"],
+            dosage=dict_["dosage"],
+            price=float(dict_["payment_limit"]),
+        )
+
+
+@dataclass(frozen=True)
+class Lab:
+    charge_code: str
+    modifier: str
+    year: int
+    description: str
+    price: float
+
+    @classmethod
+    def from_dict(cls, dict_: dict[str, str]) -> "Lab":
+        return cls(
+            charge_code=dict_["charge_code"],
+            modifier=dict_["modifier"],
+            year=int(dict_["year"]),
+            description=dict_["description"],
+            price=float(dict_["payment_limit"]),
+        )

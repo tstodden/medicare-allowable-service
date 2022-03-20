@@ -8,7 +8,7 @@ class MacLocalityRepository(Repository):
         self._repository: dict[tuple[int, int], MacLocality] = dict()
 
     @property
-    def repository(self):
+    def repository(self) -> dict[tuple[int, int], MacLocality]:
         return self._repository
 
     def get(self, key: tuple[int, int]) -> MacLocality:
